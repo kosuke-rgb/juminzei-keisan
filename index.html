@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>住民税計算ツール | 前年の年収から今年の住民税額をすぐ計算</title>
+<meta name="description" content="前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安がすぐ分かる無料ツールです。市町村民税・道府県民税の内訳もわかります。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webtools-labs.com/juminzei-keisan/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2370765779014113" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKK5TXCQEK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NKK5TXCQEK');
+</script>
+<script>
+(function () {
+  var fired = false;
+  function fireOnce() {
+    if (fired) return;
+    fired = true;
+    if (typeof gtag === 'function') gtag('event', 'tool_used', { tool_name: document.title });
+  }
+  document.addEventListener('input', fireOnce, true);
+  document.addEventListener('change', fireOnce, true);
+})();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f766e'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='sans-serif'%3E%EF%BF%A5%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="webtools-labs">
+<meta property="og:title" content="住民税計算ツール | 前年の年収から今年の住民税額をすぐ計算">
+<meta property="og:description" content="前年の年収から、今年6月から天引きされる住民税（所得割・均等割）の目安をすぐ計算できます。">
+<meta property="og:url" content="https://webtools-labs.com/juminzei-keisan/">
+<meta property="og:image" content="https://webtools-labs.com/juminzei-keisan/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="住民税計算ツール">
+<meta name="twitter:description" content="前年の年収から今年の住民税額をすぐ計算できる無料ツール。">
+<meta name="twitter:image" content="https://webtools-labs.com/juminzei-keisan/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "住民税計算ツール",
+  "url": "https://webtools-labs.com/juminzei-keisan/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "前年の年収から、今年6月から給料天引きされる住民税（所得割・均等割）の目安を計算できる無料ツール。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "なぜ今の給料から去年の住民税が引かれているのですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "住民税は「前年1月〜12月の所得」をもとに税額が確定し、翌年度に納めるしくみだからです。そのため、今年の給料から天引きされている住民税は、去年1年間の所得にもとづいて計算された金額になります。今年転職・退職・収入が大きく変わった方は、来年の住民税は今年の所得をもとに再計算されます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "住民税はいつから給料に反映されますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "会社員の場合、前年の所得にもとづく住民税額が5月頃に勤務先へ通知され、6月分の給与から翌年5月分まで12回に分けて天引き（特別徴収）されます。6月〜翌年5月という期間が、多くの会社員の住民税の納付サイクルです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "会社員（特別徴収）と自営業（普通徴収）で計算方法に違いはありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "税額の計算方法自体は同じです。違うのは納め方で、会社員は給与天引き（特別徴収、年12回）、自営業やフリーランスの方は自分で納付書や口座振替で納める（普通徴収、原則年4回）のが一般的です。本ツールは給与収入を前提とした計算のため、事業所得がある方は目安が異なります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "ふるさと納税をすると住民税はどう変わりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "ふるさと納税を行うと、寄付額から2,000円を除いた金額が翌年度の住民税から控除（税額控除）されます（ワンストップ特例または確定申告の手続きが必要）。本ツールはふるさと納税による控除を考慮していない、控除前の住民税額の目安です。" }
+    }
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #ffffff;
+  --surface-2: #f7f7f7;
+  --ink: #1a1a1a;
+  --muted: #767676;
+  --line: #e3e3e3;
+  --accent: #0f766e;
+  --best-bg: #f0f8f6;
+  --warn-bg: #fff7ed;
+  --warn-ink: #9a5b00;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+header.masthead { margin-bottom: 1.5rem; }
+h1 {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 1.7rem);
+  margin: 0 0 0.7rem;
+  letter-spacing: 0.01em;
+}
+p.lede { color: var(--muted); margin: 0; max-width: 60ch; font-size: 0.95rem; }
+.updated-note { display: block; margin-top: 0.9rem; font-size: 0.78rem; color: var(--muted); }
+
+.notice-box {
+  background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px;
+  padding: 0.9rem 1.1rem; font-size: 0.85rem; margin-bottom: 2rem;
+}
+
+section { margin-bottom: 2.5rem; }
+h2 { font-size: 1.05rem; font-weight: 700; margin: 0 0 1rem; }
+
+.field-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
+.field { flex: 1; min-width: 160px; }
+.field label { display: block; font-size: 0.83rem; color: var(--muted); margin-bottom: 0.35rem; }
+.field input[type="number"], .field select {
+  width: 100%; font-variant-numeric: tabular-nums; font-size: 1.05rem; font-family: inherit;
+  padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--ink);
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--accent); }
+.field-hint { font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem; }
+
+.summary-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card {
+  flex: 1; min-width: 180px; background: var(--best-bg); border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+.summary-card .label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; }
+.summary-card .value { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.summary-card .sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+table.compare { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.compare th, table.compare td {
+  padding: 0.55rem 0.5rem; text-align: right; border-bottom: 1px solid var(--line); vertical-align: top;
+}
+table.compare th:first-child, table.compare td:first-child { text-align: left; }
+table.compare thead th { color: var(--muted); font-weight: 500; font-size: 0.78rem; }
+table.compare td.num { font-variant-numeric: tabular-nums; }
+tr.best td { font-weight: 700; }
+tr.best { background: var(--best-bg); }
+tr.na td { color: var(--muted); }
+
+.ref-table { overflow-x: auto; }
+.ref-table table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 460px; }
+.ref-table th, .ref-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--line); text-align: left; }
+.ref-table td.num { font-variant-numeric: tabular-nums; text-align: right; }
+
+.disclaimer { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; }
+
+.share-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.share-btn {
+  display: inline-flex; align-items: center; padding: 0.5rem 1rem; border-radius: 999px;
+  color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 700;
+}
+.share-btn:hover { opacity: 0.85; }
+.share-x { background: #000; }
+.share-line { background: #06c755; }
+.share-fb { background: #1877f2; }
+.share-hatena { background: #00a4de; }
+
+.ad-slot { margin: 2.5rem 0; text-align: center; min-height: 100px; }
+
+.contact-box textarea {
+  width: 100%; min-height: 6rem; font-family: inherit; font-size: 0.92rem;
+  padding: 0.7rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  resize: vertical; margin-bottom: 0.6rem;
+}
+.contact-box input[type="email"] {
+  width: 100%; font-family: inherit; font-size: 0.92rem;
+  padding: 0.6rem 0.7rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+.contact-box textarea:focus, .contact-box input:focus { outline: none; border-color: var(--accent); }
+.contact-box button {
+  font-family: inherit; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.4rem;
+  border: none; border-radius: 6px; background: var(--accent); color: #fff; cursor: pointer;
+}
+.contact-box button:disabled { opacity: 0.5; cursor: not-allowed; }
+.contact-status { font-size: 0.85rem; margin-top: 0.6rem; }
+.contact-status.ok { color: var(--accent); }
+.contact-status.err { color: #b91c1c; }
+
+footer.site-footer {
+  margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+  font-size: 0.78rem; color: var(--muted);
+}
+footer.site-footer p { margin: 0 0 0.5rem; }
+footer.site-footer a { color: var(--accent); }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-item summary {
+  cursor: pointer; font-weight: 700; font-size: 0.92rem; list-style: none;
+  position: relative; padding-right: 1.6rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; position: absolute; right: 0; top: 0; color: var(--accent); font-weight: 700; font-size: 1.1rem;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <h1>住民税計算ツール</h1>
+    <p class="lede">前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安を、市町村民税・道府県民税の内訳つきで計算できます。</p>
+    <span class="updated-note">制度情報 最終確認日: 2026年9月17日（総務省・各市区町村公式サイトより）</span>
+  </header>
+
+  <div class="notice-box">
+    ⚠️ 本ツールは給与収入のみ・扶養親族なし・社会保険料は概算率で計算する簡易シミュレーターです。扶養控除・配偶者控除・住宅ローン控除・ふるさと納税による控除、調整控除（多くの場合2,500円程度）は考慮していません。実際の税額は市区町村から届く「住民税課税決定通知書」でご確認ください。
+  </div>
+
+  <section>
+    <h2>前年の年収から計算</h2>
+    <div class="field-row">
+      <div class="field">
+        <label for="income">前年の年収（額面・円）</label>
+        <input type="number" id="income" min="0" step="10000" value="4000000">
+        <div class="field-hint">前年1〜12月の給与収入（源泉徴収票の「支払金額」）を入力してください</div>
+      </div>
+      <div class="field">
+        <label for="ageGroup">年齢区分</label>
+        <select id="ageGroup">
+          <option value="under40">40歳未満</option>
+          <option value="over40">40歳以上（介護保険料あり）</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="summary-cards" id="summaryCards"></div>
+
+    <div style="overflow-x:auto">
+      <table class="compare">
+        <thead>
+          <tr><th>項目</th><th class="num">金額</th></tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+    <p class="disclaimer">社会保険料は年収に対する概算率（40歳未満14.7%、40歳以上15.5%）で計算しています。実際の負担率は加入する健康保険組合・都道府県や標準報酬月額の区分により異なります。</p>
+    <div class="share-row" id="shareRow">
+      <a class="share-btn share-x" id="shareX" href="#" target="_blank" rel="noopener">𝕏でシェア</a>
+      <a class="share-btn share-line" id="shareLine" href="#" target="_blank" rel="noopener">LINEで送る</a>
+      <a class="share-btn share-fb" id="shareFb" href="#" target="_blank" rel="noopener">Facebookでシェア</a>
+      <a class="share-btn share-hatena" id="shareHatena" href="#" target="_blank" rel="noopener">はてブする</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>住民税の仕組み</h2>
+    <div class="ref-table">
+      <table>
+        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>課税の基準</td><td>前年（1〜12月）の所得</td></tr>
+          <tr><td>納付期間</td><td>会社員は今年6月分〜翌年5月分の給与から天引き（特別徴収）</td></tr>
+          <tr><td>所得割</td><td>課税所得×10%（市町村民税6%＋道府県民税4%。政令指定都市は8%＋2%で合計は同じ）</td></tr>
+          <tr><td>均等割</td><td>市町村民税3,000円＋道府県民税1,000円＋森林環境税1,000円＝合計5,000円（標準額）</td></tr>
+          <tr><td>基礎控除</td><td>43万円（所得税の48万円より少ない）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="disclaimer">出典: 総務省「地方税制度」および各市区町村公式サイトの個人住民税の説明（2026年9月確認）。均等割額は自治体独自の上乗せ（超過課税）がある場合、標準額より高くなることがあります。</p>
+  </section>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-2370765779014113"
+      data-ad-slot="3021985784"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section>
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>なぜ今の給料から去年の住民税が引かれているのですか？</summary>
+      <p>住民税は「前年1月〜12月の所得」をもとに税額が確定し、翌年度に納めるしくみだからです。そのため、今年の給料から天引きされている住民税は、去年1年間の所得にもとづいて計算された金額になります。今年転職・退職・収入が大きく変わった方は、来年の住民税は今年の所得をもとに再計算されます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>住民税はいつから給料に反映されますか？</summary>
+      <p>会社員の場合、前年の所得にもとづく住民税額が5月頃に勤務先へ通知され、6月分の給与から翌年5月分まで12回に分けて天引き（特別徴収）されます。6月〜翌年5月という期間が、多くの会社員の住民税の納付サイクルです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>会社員（特別徴収）と自営業（普通徴収）で計算方法に違いはありますか？</summary>
+      <p>税額の計算方法自体は同じです。違うのは納め方で、会社員は給与天引き（特別徴収、年12回）、自営業やフリーランスの方は自分で納付書や口座振替で納める（普通徴収、原則年4回）のが一般的です。本ツールは給与収入を前提とした計算のため、事業所得がある方は目安が異なります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>ふるさと納税をすると住民税はどう変わりますか？</summary>
+      <p>ふるさと納税を行うと、寄付額から2,000円を除いた金額が翌年度の住民税から控除（税額控除）されます（ワンストップ特例または確定申告の手続きが必要）。本ツールはふるさと納税による控除を考慮していない、控除前の住民税額の目安です。</p>
+    </details>
+  </section>
+
+  <section class="contact-box">
+    <h2>ご意見・追加してほしい機能</h2>
+    <p class="lede" style="margin-bottom:0.9rem;">気づいたことや、あったら便利な機能があれば教えてください。</p>
+    <form id="contactForm">
+      <input type="email" id="contactEmail" placeholder="返信が必要な場合はメールアドレス（任意）">
+      <textarea id="contactMessage" placeholder="ご意見・ご要望をどうぞ" required></textarea>
+      <button type="submit" id="contactSubmit">送信する</button>
+      <p class="contact-status" id="contactStatus"></p>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <p>本ツールの金額は給与収入のみを前提とした簡易概算であり、正確性を保証するものではありません。扶養控除・住宅ローン控除・ふるさと納税等は考慮していません。正確な金額はお住まいの市区町村にご確認ください。</p>
+    <p>あわせて使える：
+      <a href="https://webtools-labs.com/furima-hikaku-keisan/">フリマ手数料計算・比較ツール</a> ／
+      <a href="https://webtools-labs.com/furima-hasso-hikaku/">フリマ配送方法・送料比較ツール</a> ／
+      <a href="https://webtools-labs.com/furima-tedori-simulator/">フリマ手取りシミュレーター</a> ／
+      <a href="https://webtools-labs.com/yukyu-hiyou-keisan/">有給休暇 付与日数計算ツール</a> ／
+      <a href="https://webtools-labs.com/revolving-risoku-keisan/">リボ払い・分割払い 実質利息計算ツール</a> ／
+      <a href="https://webtools-labs.com/taishoku-yukyu-keisan/">退職時の有給消化シミュレーター</a> ／
+      <a href="https://webtools-labs.com/fuyou-no-kabe-keisan/">扶養の壁チェッカー</a> ／
+      <a href="https://webtools-labs.com/tedori-keisan/">手取り計算ツール</a> ／
+      <a href="https://webtools-labs.com/taishokukin-zei-keisan/">退職金の税金計算ツール</a> ／
+      <a href="https://webtools-labs.com/sankyu-ikuji-teate-keisan/">産休・育休手当金シミュレーター</a> ／
+      <a href="https://webtools-labs.com/zangyodai-keisan/">残業代計算ツール</a> ／
+      <a href="https://webtools-labs.com/shitsugyo-hoken-keisan/">失業保険（基本手当）シミュレーター</a> ／
+      <a href="https://webtools-labs.com/jikyu-nenshu-keisan/">時給から年収・月収を計算</a> ／
+      <a href="https://webtools-labs.com/yubin-kitte-keisan/">郵便物の切手代早見表</a> ／
+      <a href="https://webtools-labs.com/bonus-tedori-keisan/">賞与手取り計算ツール</a> ／
+      <a href="https://webtools-labs.com/shoubyou-teate-keisan/">傷病手当金計算ツール</a>
+    </p>
+    <p>当サイトは広告を掲載する場合があります。</p>
+    <p><a href="https://webtools-labs.com/about/">運営者情報</a> ／ <a href="https://webtools-labs.com/privacy/">プライバシーポリシー</a></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  function yen(n) { return Math.round(n).toLocaleString('ja-JP') + '円'; }
+
+  function salaryDeduction(income) {
+    if (income <= 1625000) return 550000;
+    if (income <= 1800000) return Math.round(income * 0.4 - 100000);
+    if (income <= 3600000) return Math.round(income * 0.3 + 80000);
+    if (income <= 6600000) return Math.round(income * 0.2 + 440000);
+    if (income <= 8500000) return Math.round(income * 0.1 + 1100000);
+    return 1950000;
+  }
+
+  function socialInsurance(income, ageGroup) {
+    var rate = ageGroup === 'over40' ? 0.155 : 0.147;
+    return Math.round(income * rate);
+  }
+
+  function calc(income, ageGroup) {
+    var salaryIncome = Math.max(0, income - salaryDeduction(income));
+    var socialIns = socialInsurance(income, ageGroup);
+    var taxable = Math.max(0, salaryIncome - socialIns - 430000);
+    var shotokuwariCity = Math.round(taxable * 0.06);
+    var shotokuwariPref = Math.round(taxable * 0.04);
+    var kintouwariCity = 3000;
+    var kintouwariPref = 1000;
+    var shinrinTax = 1000;
+    var totalShotokuwari = shotokuwariCity + shotokuwariPref;
+    var totalKintouwari = kintouwariCity + kintouwariPref + shinrinTax;
+    var total = totalShotokuwari + totalKintouwari;
+    return {
+      income: income, salaryIncome: salaryIncome, socialIns: socialIns, taxable: taxable,
+      shotokuwariCity: shotokuwariCity, shotokuwariPref: shotokuwariPref, totalShotokuwari: totalShotokuwari,
+      kintouwariCity: kintouwariCity, kintouwariPref: kintouwariPref, shinrinTax: shinrinTax,
+      totalKintouwari: totalKintouwari, total: total
+    };
+  }
+
+  var incomeInput = document.getElementById('income');
+  var ageGroupSelect = document.getElementById('ageGroup');
+  var summaryCards = document.getElementById('summaryCards');
+  var resultBody = document.getElementById('resultBody');
+  var shareX = document.getElementById('shareX');
+  var shareLine = document.getElementById('shareLine');
+  var shareFb = document.getElementById('shareFb');
+  var shareHatena = document.getElementById('shareHatena');
+
+  function setShareLinks(text, url) {
+    shareX.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+    shareLine.href = 'https://line.me/R/msg/text/?' + encodeURIComponent(text + '\n' + url);
+    shareFb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '&quote=' + encodeURIComponent(text);
+    shareHatena.href = 'https://b.hatena.ne.jp/entry/panel/?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(text);
+  }
+
+  function render() {
+    var income = Math.max(0, Number(incomeInput.value) || 0);
+    var ageGroup = ageGroupSelect.value;
+    var r = calc(income, ageGroup);
+
+    summaryCards.innerHTML =
+      '<div class="summary-card"><div class="label">住民税（年額）</div><div class="value">' + yen(r.total) + '</div><div class="sub">今年6月〜翌年5月に天引き</div></div>' +
+      '<div class="summary-card"><div class="label">月あたり目安</div><div class="value">' + yen(r.total / 12) + '</div><div class="sub">単純に12等分した目安</div></div>';
+
+    var rows = [
+      ['前年の年収', yen(r.income)],
+      ['給与所得（年収−給与所得控除）', yen(r.salaryIncome)],
+      ['社会保険料控除（概算）', '－' + yen(r.socialIns)],
+      ['基礎控除', '－' + yen(430000)],
+      ['課税所得', yen(r.taxable)],
+      ['所得割・市町村民税（6%）', yen(r.shotokuwariCity)],
+      ['所得割・道府県民税（4%）', yen(r.shotokuwariPref)],
+      ['均等割（市町村3,000円＋道府県1,000円＋森林環境税1,000円）', yen(r.totalKintouwari)],
+      ['住民税（年額）', yen(r.total)]
+    ];
+    resultBody.innerHTML = rows.map(function (row, i) {
+      var isLast = i === rows.length - 1;
+      return '<tr class="' + (isLast ? 'best' : '') + '"><td>' + row[0] + '</td><td class="num">' + row[1] + '</td></tr>';
+    }).join('');
+
+    var shareText = '前年年収' + income.toLocaleString('ja-JP') + '円の住民税を計算したら\n' +
+      '年額 ' + yen(r.total) + '(月あたり目安 ' + yen(r.total / 12) + ')でした\n\n住民税計算ツール';
+    setShareLinks(shareText, 'https://webtools-labs.com/juminzei-keisan/');
+  }
+
+  incomeInput.addEventListener('input', render);
+  ageGroupSelect.addEventListener('change', render);
+
+  render();
+
+  var WEB3FORMS_ACCESS_KEY = '4551c9fd-4327-4bd4-97e0-8b93d85fd077';
+  var contactForm = document.getElementById('contactForm');
+  var contactStatus = document.getElementById('contactStatus');
+  var contactSubmit = document.getElementById('contactSubmit');
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    contactSubmit.disabled = true;
+    contactStatus.textContent = '送信中...';
+    contactStatus.className = 'contact-status';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: '住民税計算ツールへのお問い合わせ',
+        email: document.getElementById('contactEmail').value || 'noreply@example.com',
+        message: document.getElementById('contactMessage').value
+      })
+    }).then(function (res) { return res.json(); }).then(function (data) {
+      contactSubmit.disabled = false;
+      if (data.success) {
+        contactStatus.textContent = '送信しました。ありがとうございます！';
+        contactStatus.className = 'contact-status ok';
+        contactForm.reset();
+      } else {
+        contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+        contactStatus.className = 'contact-status err';
+      }
+    }).catch(function () {
+      contactSubmit.disabled = false;
+      contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+      contactStatus.className = 'contact-status err';
+    });
+  });
+})();
+</script>
+</body>
+</html>
