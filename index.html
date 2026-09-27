@@ -241,11 +241,11 @@ footer.site-footer a { color: var(--accent); }
   <header class="masthead">
     <h1>住民税計算ツール</h1>
     <p class="lede">前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安を、市町村民税・道府県民税の内訳つきで計算できます。</p>
-    <span class="updated-note">制度情報 最終確認日: 2026年9月17日（総務省・各市区町村公式サイトより）</span>
+    <span class="updated-note">制度情報 最終確認日: 2026年9月27日（総務省・国税庁公式サイトより、給与所得控除の見直しに対応済み）</span>
   </header>
 
   <div class="notice-box">
-    ⚠️ 本ツールは給与収入のみ・扶養親族なし・社会保険料は概算率で計算する簡易シミュレーターです。扶養控除・配偶者控除・住宅ローン控除・ふるさと納税による控除、調整控除（多くの場合2,500円程度）は考慮していません。個人住民税の仕組みは<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">総務省</a>の解説もご参照ください。実際の税額は市区町村から届く「住民税課税決定通知書」でご確認ください。
+    ⚠️ 本ツールは給与収入のみ・扶養親族なし・社会保険料は概算率で計算する簡易シミュレーターです。扶養控除・配偶者控除・住宅ローン控除・ふるさと納税による控除、調整控除（多くの場合2,500円程度）は考慮していません。給与所得控除は令和8年分の最新の金額を使用しています（前年の年収をもとに計算するため、正確には令和7年分の金額とわずかに異なる場合があります）。個人住民税の基礎控除43万円は所得税の改正と連動せず据え置かれています（総務省）。個人住民税の仕組みは<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">総務省</a>の解説もご参照ください。実際の税額は市区町村から届く「住民税課税決定通知書」でご確認ください。
   </div>
 
   <section>
@@ -427,9 +427,9 @@ footer.site-footer a { color: var(--accent); }
 (function () {
   function yen(n) { return Math.round(n).toLocaleString('ja-JP') + '円'; }
 
+  // 給与所得控除（令和8年分以後。国税庁タックスアンサーNo.1410にもとづく）
   function salaryDeduction(income) {
-    if (income <= 1625000) return 550000;
-    if (income <= 1800000) return Math.round(income * 0.4 - 100000);
+    if (income <= 2200000) return 740000;
     if (income <= 3600000) return Math.round(income * 0.3 + 80000);
     if (income <= 6600000) return Math.round(income * 0.2 + 440000);
     if (income <= 8500000) return Math.round(income * 0.1 + 1100000);
