@@ -256,12 +256,12 @@ footer.site-footer a { color: var(--accent); }
   <header class="masthead">
     <h1>住民税計算ツール</h1>
     <p class="lede">前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安を、市町村民税・道府県民税の内訳つきで計算できます。</p>
-    <span class="updated-note">制度情報 最終確認日: 2026年9月27日（総務省・国税庁公式サイトより、給与所得控除の見直しに対応済み）</span>
+    <span class="updated-note">制度情報 最終確認日: 2026年10月10日（総務省・国税庁公式サイトより、給与所得控除の見直しに対応済み）</span>
     <p class="ad-disclosure" style="font-size:0.75rem;opacity:0.7;margin:0.5rem 0 0;">※当サイトはアフィリエイト広告（PR）を利用しています。</p>
   </header>
 
   <div class="notice-box">
-    ⚠️ 本ツールは給与収入のみ・扶養親族なし・社会保険料は概算率で計算する簡易シミュレーターです。扶養控除・配偶者控除・住宅ローン控除・ふるさと納税による控除、調整控除（多くの場合2,500円程度）は考慮していません。給与所得控除は令和8年分の最新の金額を使用しています（前年の年収をもとに計算するため、正確には令和7年分の金額とわずかに異なる場合があります）。個人住民税の基礎控除43万円は所得税の改正と連動せず据え置かれています（総務省）。個人住民税の仕組みは<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">総務省</a>の解説もご参照ください。実際の税額は市区町村から届く「住民税課税決定通知書」でご確認ください。
+    ⚠️ 本ツールは給与収入のみ・扶養親族なし・社会保険料は概算率で計算する簡易シミュレーターです。扶養控除・配偶者控除・住宅ローン控除・ふるさと納税による控除、調整控除（多くの場合2,500円程度）は考慮していません。給与所得控除は、令和8年度（2025年の収入）なら令和7年分（最低65万円）、令和9年度（2026年の収入）なら令和8年分（最低74万円）の金額を使います。個人住民税の基礎控除43万円は所得税の改正と連動せず据え置かれています（総務省）。個人住民税の仕組みは<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">総務省</a>の解説もご参照ください。実際の税額は市区町村から届く「住民税課税決定通知書」でご確認ください。
   </div>
 
   <section>
@@ -278,6 +278,13 @@ footer.site-footer a { color: var(--accent); }
         <label for="income">前年の年収（額面・円）</label>
         <input type="number" id="income" min="0" step="10000" value="4000000">
         <div class="field-hint">前年1〜12月の給与収入（源泉徴収票の「支払金額」）を入力してください</div>
+      </div>
+      <div class="field">
+        <label for="taxYear">住民税の年度</label>
+        <select id="taxYear">
+          <option value="r8" selected>令和8年度（2026年6月〜／2025年の収入）</option>
+          <option value="r9">令和9年度（2027年6月〜／2026年の収入）</option>
+        </select>
       </div>
       <div class="field">
         <label for="ageGroup">年齢区分</label>
@@ -341,6 +348,37 @@ footer.site-footer a { color: var(--accent); }
       </table>
     </div>
     <p class="disclaimer">前年年収400万円の場合、住民税は年額でおよそ17.9万円、6月からの給与天引きでは月あたり約1.5万円が目安になります。</p>
+  </section>
+
+  <section>
+    <h2>年収別 住民税の早見表</h2>
+    <p>給与収入のみ・独身・40歳未満の場合の、1年間の住民税と、給与から天引きされる月額（12回払い）の目安です。</p>
+    <div class="ref-table" style="overflow-x:auto">
+      <table style="white-space:nowrap">
+        <thead><tr><th>前年の年収</th><th class="num">令和8年度の住民税<br>（2025年の収入）</th><th class="num">月額の目安</th><th class="num">令和9年度の住民税<br>（2026年の収入）</th></tr></thead>
+        <tbody>
+          <tr><td>150万円</td><td class="num">24,950円</td><td class="num">2,079円</td><td class="num">15,950円</td></tr>
+          <tr><td>200万円</td><td class="num">64,600円</td><td class="num">5,383円</td><td class="num">58,600円</td></tr>
+          <tr><td>250万円</td><td class="num">92,250円</td><td class="num">7,688円</td><td class="num">92,250円</td></tr>
+          <tr><td>300万円</td><td class="num">119,900円</td><td class="num">9,992円</td><td class="num">119,900円</td></tr>
+          <tr><td>400万円</td><td class="num">179,200円</td><td class="num">14,933円</td><td class="num">179,200円</td></tr>
+          <tr><td>500万円</td><td class="num">244,500円</td><td class="num">20,375円</td><td class="num">244,500円</td></tr>
+          <tr><td>600万円</td><td class="num">309,800円</td><td class="num">25,817円</td><td class="num">309,800円</td></tr>
+          <tr><td>800万円</td><td class="num">454,400円</td><td class="num">37,867円</td><td class="num">454,400円</td></tr>
+          <tr><td>1,000万円</td><td class="num">620,000円</td><td class="num">51,667円</td><td class="num">620,000円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="disclaimer">上の計算ツールと同じ方法（所得割10%＋均等割5,000円、調整控除なし）で計算した目安です。2026年の収入から給与所得控除の最低額が74万円に引き上げられたため、年収200万円前後以下の人は、令和9年度の住民税が少し安くなります。</p>
+  </section>
+
+  <section>
+    <h2>住民税の払い方とスケジュール</h2>
+    <ul>
+      <li><strong>会社員（特別徴収）</strong>: 毎年5〜6月ごろに勤務先経由で「住民税決定通知書」が届き、6月の給与から翌年5月の給与まで、12回に分けて天引きされます。</li>
+      <li><strong>自営業・退職した人など（普通徴収）</strong>: 6月ごろに市区町村から納税通知書が届き、原則として6月・8月・10月・翌年1月の4回に分けて自分で納めます。</li>
+    </ul>
+    <p><strong>退職したときの住民税</strong>は、退職した時期で扱いが変わります。1月〜4月に退職した場合は、5月までに納める残りの住民税が最後の給与や退職金からまとめて差し引かれます。6月〜12月に退職した場合は、本人の希望で最後の給与からまとめて差し引くか、残りを自分で納める（普通徴収）かを選びます。収入が減っても前年の所得にかかる住民税は払う必要があるため、退職後の資金計画に入れておきましょう。</p>
   </section>
 
   <div class="ad-slot">
@@ -463,8 +501,17 @@ footer.site-footer a { color: var(--accent); }
   function yen(n) { return Math.round(n).toLocaleString('ja-JP') + '円'; }
 
   // 給与所得控除（令和8年分以後。国税庁タックスアンサーNo.1410にもとづく）
-  function salaryDeduction(income) {
-    if (income <= 2200000) return 740000;
+  // 令和8年度の住民税は2025年（令和7年分）の収入にかかるため、給与所得控除は令和7年分（最低65万円）を使う。
+  // 令和9年度（2026年の収入）は令和8年分（最低74万円）。2026-10-10修正（以前は年度に関係なく令和8年分を使っていた）
+  function salaryDeduction(income, taxYear) {
+    if (taxYear === 'r8') {
+      if (income <= 1900000) return Math.min(income, 650000);
+      if (income <= 3600000) return Math.round(income * 0.3 + 80000);
+      if (income <= 6600000) return Math.round(income * 0.2 + 440000);
+      if (income <= 8500000) return Math.round(income * 0.1 + 1100000);
+      return 1950000;
+    }
+    if (income <= 2200000) return Math.min(income, 740000);
     if (income <= 3600000) return Math.round(income * 0.3 + 80000);
     if (income <= 6600000) return Math.round(income * 0.2 + 440000);
     if (income <= 8500000) return Math.round(income * 0.1 + 1100000);
@@ -476,8 +523,8 @@ footer.site-footer a { color: var(--accent); }
     return Math.round(income * rate);
   }
 
-  function calc(income, ageGroup) {
-    var salaryIncome = Math.max(0, income - salaryDeduction(income));
+  function calc(income, ageGroup, taxYear) {
+    var salaryIncome = Math.max(0, income - salaryDeduction(income, taxYear || 'r8'));
     var socialIns = socialInsurance(income, ageGroup);
     var taxable = Math.max(0, salaryIncome - socialIns - 430000);
     var shotokuwariCity = Math.round(taxable * 0.06);
@@ -498,6 +545,7 @@ footer.site-footer a { color: var(--accent); }
 
   var incomeInput = document.getElementById('income');
   var ageGroupSelect = document.getElementById('ageGroup');
+  var taxYearSelect = document.getElementById('taxYear');
   var summaryCards = document.getElementById('summaryCards');
   var resultBody = document.getElementById('resultBody');
   var shareX = document.getElementById('shareX');
@@ -515,7 +563,7 @@ footer.site-footer a { color: var(--accent); }
   function render() {
     var income = Math.max(0, Number(incomeInput.value) || 0);
     var ageGroup = ageGroupSelect.value;
-    var r = calc(income, ageGroup);
+    var r = calc(income, ageGroup, taxYearSelect.value);
 
     summaryCards.innerHTML =
       '<div class="summary-card"><div class="label">住民税（年額）</div><div class="value">' + yen(r.total) + '</div><div class="sub">今年6月〜翌年5月に天引き</div></div>' +
@@ -544,6 +592,7 @@ footer.site-footer a { color: var(--accent); }
 
   incomeInput.addEventListener('input', render);
   ageGroupSelect.addEventListener('change', render);
+  taxYearSelect.addEventListener('change', render);
 
   render();
 
