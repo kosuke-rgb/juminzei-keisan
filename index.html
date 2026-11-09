@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>住民税計算ツール | 前年の年収から今年の住民税額をすぐ計算</title>
-<meta name="description" content="前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安がすぐ分かる無料ツールです。市町村民税・道府県民税の内訳もわかります。">
+<meta name="description" content="前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安がすぐ分かる無料ツールです。市町村民税・道府県民税の内訳もわかります。住民税がかからない年収（非課税ライン）の早見表つき。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://webtools-labs.com/juminzei-keisan/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2370765779014113" crossorigin="anonymous"></script>
@@ -88,6 +88,16 @@
       "@type": "Question",
       "name": "住民税の金額は住んでいる自治体によって違いますか？",
       "acceptedAnswer": { "@type": "Answer", "text": "所得割（10%）はほとんどの自治体で共通ですが、均等割は自治体が独自に上乗せ（超過課税）している場合があり、標準の5,000円より高くなることがあります。本ツールは全国共通の標準額で計算しているため、お住まいの自治体によっては実際の金額と数百円程度の差が出ることがあります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "住民税がかからない年収はいくらですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "給与収入だけの独身の人なら、1級地（東京23区・大阪市など）で年収110万円以下（2025年の収入にかかる令和8年度の住民税）が目安です。2026年の収入からは給与所得控除の最低額が74万円に上がるため、119万円以下になります。2級地・3級地の市町村では、これより3.5万円〜7万円低いラインになります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2026年の年収が119万円なら、住民税は本当に0円ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "1級地に住む、給与収入だけの独身の人であれば、2027年6月から納める令和9年度の住民税はかからない目安です。年収119万円から給与所得控除74万円を引いた所得が45万円になり、非課税の基準（45万円以下）に収まるためです。2級地・3級地では均等割（定額部分）だけがかかる場合があるので、お住まいの市区町村で確認してください。" }
     }
   ]
 }
@@ -271,7 +281,7 @@ footer.site-footer a { color: var(--accent); }
   <header class="masthead">
     <h1>住民税計算ツール</h1>
     <p class="lede">前年の年収を入れるだけで、今年6月から給料天引きされる住民税（所得割・均等割）の目安を、市町村民税・道府県民税の内訳つきで計算できます。</p>
-    <span class="updated-note">制度情報 最終確認日: 2026年10月10日（総務省・国税庁公式サイトより、給与所得控除の見直しに対応済み）</span>
+    <span class="updated-note">制度情報 最終確認日: 2026年11月10日（総務省・国税庁公式サイトより、給与所得控除の見直しに対応済み）</span>
     <p class="ad-disclosure" style="font-size:0.75rem;opacity:0.7;margin:0.5rem 0 0;">※当サイトはアフィリエイト広告（PR）を利用しています。</p>
   </header>
 
@@ -320,7 +330,7 @@ footer.site-footer a { color: var(--accent); }
         <tbody id="resultBody"></tbody>
       </table>
     </div>
-    <p class="disclaimer">社会保険料は年収に対する概算率（40歳未満14.7%、40歳以上15.5%）で計算しています。実際の負担率は加入する健康保険組合・都道府県や標準報酬月額の区分により異なります。</p>
+    <p class="disclaimer">社会保険料は年収に対する概算率（40歳未満14.7%、40歳以上15.5%）で計算しています。実際の負担率は加入する健康保険組合・都道府県や標準報酬月額の区分により異なります。給与所得が45万円以下の場合は、独身・扶養なし・1級地の基準で住民税を0円（非課税）としています。</p>
     <div class="share-row" id="shareRow">
       <a class="share-btn share-x" id="shareX" href="#" target="_blank" rel="noopener">𝕏でシェア</a>
       <a class="share-btn share-line" id="shareLine" href="#" target="_blank" rel="noopener">LINEで送る</a>
@@ -403,6 +413,28 @@ footer.site-footer a { color: var(--accent); }
     </div>
     <p class="disclaimer">上の計算ツールと同じ方法（所得割10%＋均等割5,000円、調整控除なし）で計算した目安です。2026年の収入から給与所得控除の最低額が74万円に引き上げられたため、年収200万円前後以下の人は、令和9年度の住民税が少し安くなります。</p>
   </section>
+
+  <section id="hikazei">
+    <h2>住民税がかからない年収はいくら？非課税ラインの早見表</h2>
+    <p>前年の所得が一定額以下だと、住民税はかかりません。給与収入だけの<strong>独身（扶養なし）</strong>の人の場合、住民税が0円になる年収の目安は次のとおりです。お住まいの市区町村の「級地」（生活保護の基準で使う地域の区分）によって少し変わります。</p>
+    <div class="ref-table" style="overflow-x:auto">
+      <table>
+        <thead><tr><th>住んでいる地域</th><th class="num">令和8年度の住民税<br>（2025年の収入）</th><th class="num">令和9年度の住民税<br>（2026年の収入）</th></tr></thead>
+        <tbody>
+          <tr><td>1級地（東京23区・大阪市・福岡市など大都市）</td><td class="num">110万円以下</td><td class="num">119万円以下</td></tr>
+          <tr><td>2級地（県庁所在地や大都市の周辺など）</td><td class="num">106.5万円以下</td><td class="num">115.5万円以下</td></tr>
+          <tr><td>3級地（そのほかの市町村）</td><td class="num">103万円以下</td><td class="num">112万円以下</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul style="padding-left:1.3rem;">
+      <li><strong>2026年の収入からラインが9万円上がります。</strong>令和8年度の税制改正で、給与所得控除の最低額が65万円から74万円に引き上げられたためです。2026年の年収が119万円（1級地）以下なら、2027年6月からの住民税はかかりません。</li>
+      <li><strong>所得に応じてかかる「所得割」は、地域に関係なく</strong>年収110万円（2026年の収入なら119万円）以下ならかかりません。2級地・3級地で上の表のラインを少し超える人は、定額の「均等割」だけがかかる場合があります。</li>
+      <li><strong>扶養している家族がいると、ラインは上がります。</strong>たとえば1級地で2026年の収入の場合、扶養1人なら年収175万円以下、扶養2人なら210万円以下が目安です。</li>
+    </ul>
+    <p class="disclaimer">給与収入だけの場合の目安です。自分の市区町村が何級地かは、市区町村の住民税のページで確認できます。出典: 総務省「個人住民税」、<a href="https://www.city.fukuoka.lg.jp/zaisei/shisanzei/life/R9_kaisei.html" target="_blank" rel="noopener">福岡市「令和9年度個人市県民税の主な改正点」</a>。</p>
+  </section>
+
 
   <section>
     <h2>住民税の払い方とスケジュール</h2>
@@ -493,6 +525,14 @@ footer.site-footer a { color: var(--accent); }
     <details class="faq-item">
       <summary>住民税の金額は住んでいる自治体によって違いますか？</summary>
       <p>所得割（10%）はほとんどの自治体で共通ですが、均等割は自治体が独自に上乗せ（超過課税）している場合があり、標準の5,000円より高くなることがあります。本ツールは全国共通の標準額で計算しているため、お住まいの自治体によっては実際の金額と数百円程度の差が出ることがあります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>住民税がかからない年収はいくらですか？</summary>
+      <p>給与収入だけの独身の人なら、1級地（東京23区・大阪市など）で年収110万円以下（2025年の収入にかかる令和8年度の住民税）が目安です。2026年の収入からは給与所得控除の最低額が74万円に上がるため、119万円以下になります。2級地・3級地の市町村では、これより3.5万円〜7万円低いラインになります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>2026年の年収が119万円なら、住民税は本当に0円ですか？</summary>
+      <p>1級地に住む、給与収入だけの独身の人であれば、2027年6月から納める令和9年度の住民税はかからない目安です。年収119万円から給与所得控除74万円を引いた所得が45万円になり、非課税の基準（45万円以下）に収まるためです。2級地・3級地では均等割（定額部分）だけがかかる場合があるので、お住まいの市区町村で確認してください。</p>
     </details>
   </section>
 
@@ -588,6 +628,11 @@ footer.site-footer a { color: var(--accent); }
     var totalShotokuwari = shotokuwariCity + shotokuwariPref;
     var totalKintouwari = kintouwariCity + kintouwariPref + shinrinTax;
     var total = totalShotokuwari + totalKintouwari;
+    // 非課税（独身・扶養なし・1級地の基準: 合計所得金額45万円以下は所得割・均等割とも0）
+    if (salaryIncome <= 450000) {
+      shotokuwariCity = shotokuwariPref = totalShotokuwari = 0;
+      kintouwariCity = kintouwariPref = shinrinTax = totalKintouwari = total = 0;
+    }
     return {
       income: income, salaryIncome: salaryIncome, socialIns: socialIns, taxable: taxable,
       shotokuwariCity: shotokuwariCity, shotokuwariPref: shotokuwariPref, totalShotokuwari: totalShotokuwari,
