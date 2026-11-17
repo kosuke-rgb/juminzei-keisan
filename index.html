@@ -184,7 +184,7 @@ tr.best { background: var(--best-bg); }
 tr.na td { color: var(--muted); }
 
 .ref-table { overflow-x: auto; }
-.ref-table table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 460px; }
+.ref-table table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 0; }
 .ref-table th, .ref-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--line); text-align: left; }
 .ref-table td.num { font-variant-numeric: tabular-nums; text-align: right; }
 
@@ -273,6 +273,15 @@ footer.site-footer a { color: var(--accent); }
 .related-tools a { color: var(--accent); font-weight: 700; text-decoration: none; }
 .related-tools a:hover { text-decoration: underline; }
 .related-tools li p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.85rem; }
+/* スマホで表が画面からはみ出さないように（2026-11-17） */
+@media (max-width: 600px) {
+  .ref-table table { font-size: 0.8rem; }
+  .ref-table th, .ref-table td { padding: 0.45rem 0.3rem; }
+  .ref-table th, .ref-table td:first-child { white-space: normal; }
+  .ref-table td.nw { white-space: nowrap; }
+  .ref-table th:first-child, .ref-table td:first-child { min-width: 5em; position: sticky; left: 0; z-index: 1; background: var(--bg); box-shadow: 1px 0 0 var(--line); }
+  .ref-table tr.best td:first-child, .ref-table tr.total td:first-child, .ref-table tr.next td:first-child, .ref-table tr.highlight td:first-child { background: var(--best-bg, var(--bg)); }
+}
 </style>
 </head>
 <body>
@@ -380,11 +389,11 @@ footer.site-footer a { color: var(--accent); }
       <table>
         <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
         <tbody>
-          <tr><td>① 給与所得（年収400万円−給与所得控除124万円）</td><td class="num">276万円</td></tr>
+          <tr><td>① 給与所得（年収400万円−給与所得控除124万円）</td><td class="num nw">276万円</td></tr>
           <tr><td>② 社会保険料控除（概算14.7%）</td><td class="num">▲58.8万円</td></tr>
           <tr><td>③ 基礎控除</td><td class="num">▲43万円</td></tr>
-          <tr><td>④ 課税所得（①−②−③）</td><td class="num">174.2万円</td></tr>
-          <tr><td>⑤ 所得割（課税所得×10%）</td><td class="num">17.42万円</td></tr>
+          <tr><td>④ 課税所得（①−②−③）</td><td class="num nw">174.2万円</td></tr>
+          <tr><td>⑤ 所得割（課税所得×10%）</td><td class="num nw">17.42万円</td></tr>
           <tr class="best"><td>住民税（年額、⑤＋均等割5,000円）</td><td class="num">約17.9万円(月あたり約1.5万円)</td></tr>
         </tbody>
       </table>
@@ -399,15 +408,15 @@ footer.site-footer a { color: var(--accent); }
       <table style="white-space:nowrap">
         <thead><tr><th>前年の年収</th><th class="num">令和8年度の住民税<br>（2025年の収入）</th><th class="num">月額の目安</th><th class="num">令和9年度の住民税<br>（2026年の収入）</th></tr></thead>
         <tbody>
-          <tr><td>150万円</td><td class="num">24,950円</td><td class="num">2,079円</td><td class="num">15,950円</td></tr>
-          <tr><td>200万円</td><td class="num">64,600円</td><td class="num">5,383円</td><td class="num">58,600円</td></tr>
-          <tr><td>250万円</td><td class="num">92,250円</td><td class="num">7,688円</td><td class="num">92,250円</td></tr>
-          <tr><td>300万円</td><td class="num">119,900円</td><td class="num">9,992円</td><td class="num">119,900円</td></tr>
-          <tr><td>400万円</td><td class="num">179,200円</td><td class="num">14,933円</td><td class="num">179,200円</td></tr>
-          <tr><td>500万円</td><td class="num">244,500円</td><td class="num">20,375円</td><td class="num">244,500円</td></tr>
-          <tr><td>600万円</td><td class="num">309,800円</td><td class="num">25,817円</td><td class="num">309,800円</td></tr>
-          <tr><td>800万円</td><td class="num">454,400円</td><td class="num">37,867円</td><td class="num">454,400円</td></tr>
-          <tr><td>1,000万円</td><td class="num">620,000円</td><td class="num">51,667円</td><td class="num">620,000円</td></tr>
+          <tr><td>150万円</td><td class="num nw">24,950円</td><td class="num nw">2,079円</td><td class="num nw">15,950円</td></tr>
+          <tr><td>200万円</td><td class="num nw">64,600円</td><td class="num nw">5,383円</td><td class="num nw">58,600円</td></tr>
+          <tr><td>250万円</td><td class="num nw">92,250円</td><td class="num nw">7,688円</td><td class="num nw">92,250円</td></tr>
+          <tr><td>300万円</td><td class="num nw">119,900円</td><td class="num nw">9,992円</td><td class="num nw">119,900円</td></tr>
+          <tr><td>400万円</td><td class="num nw">179,200円</td><td class="num nw">14,933円</td><td class="num nw">179,200円</td></tr>
+          <tr><td>500万円</td><td class="num nw">244,500円</td><td class="num nw">20,375円</td><td class="num nw">244,500円</td></tr>
+          <tr><td>600万円</td><td class="num nw">309,800円</td><td class="num nw">25,817円</td><td class="num nw">309,800円</td></tr>
+          <tr><td>800万円</td><td class="num nw">454,400円</td><td class="num nw">37,867円</td><td class="num nw">454,400円</td></tr>
+          <tr><td>1,000万円</td><td class="num nw">620,000円</td><td class="num nw">51,667円</td><td class="num nw">620,000円</td></tr>
         </tbody>
       </table>
     </div>
@@ -421,9 +430,9 @@ footer.site-footer a { color: var(--accent); }
       <table>
         <thead><tr><th>住んでいる地域</th><th class="num">令和8年度の住民税<br>（2025年の収入）</th><th class="num">令和9年度の住民税<br>（2026年の収入）</th></tr></thead>
         <tbody>
-          <tr><td>1級地（東京23区・大阪市・福岡市など大都市）</td><td class="num">110万円以下</td><td class="num">119万円以下</td></tr>
-          <tr><td>2級地（県庁所在地や大都市の周辺など）</td><td class="num">106.5万円以下</td><td class="num">115.5万円以下</td></tr>
-          <tr><td>3級地（そのほかの市町村）</td><td class="num">103万円以下</td><td class="num">112万円以下</td></tr>
+          <tr><td>1級地（東京23区・大阪市・福岡市など大都市）</td><td class="num nw">110万円以下</td><td class="num nw">119万円以下</td></tr>
+          <tr><td>2級地（県庁所在地や大都市の周辺など）</td><td class="num nw">106.5万円以下</td><td class="num nw">115.5万円以下</td></tr>
+          <tr><td>3級地（そのほかの市町村）</td><td class="num nw">103万円以下</td><td class="num nw">112万円以下</td></tr>
         </tbody>
       </table>
     </div>
